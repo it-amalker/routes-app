@@ -11,9 +11,7 @@ import {
   ComboboxList,
 } from '@reach/combobox';
 
-type SearchProps = {
-  navigateTo: (lat: number, lng: number) => void;
-};
+import { SearchProps } from '../types/props';
 
 const Search: React.FC<SearchProps> = ({ navigateTo }) => {
   const {
