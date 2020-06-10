@@ -12,13 +12,14 @@ import { SetZoomType } from '../interfaces/mapZoom';
 import { MarkerType } from '../types/marker';
 import { EventClickType } from '../types/events';
 import { MapProps } from '../types/props';
+import Directions from './Directions';
 
 const maxMarkersOnMap = 5;
 
 const libraries = ['places'];
 
 const mapContainerStyle = {
-  width: '100vw',
+  width: '100%',
   height: '100vh',
 };
 
@@ -129,6 +130,9 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
             />
           ))}
           {selectedMarker ? renderWindowInfo() : null}
+          {markers.length > 1 ? (
+            <Directions places={markers} travelMode="DRIVING" />
+          ) : null}
         </GoogleMap>
       </>
     );
