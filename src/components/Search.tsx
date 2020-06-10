@@ -37,6 +37,7 @@ const Search: React.FC<SearchProps> = ({ navigateTo }) => {
         }}
       >
         <ComboboxInput
+          className="search-input"
           value={value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
             setValue(e.target.value);
