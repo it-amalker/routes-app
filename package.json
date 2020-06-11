@@ -1,6 +1,6 @@
 {
   "name": "routes-app",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Routes with google maps",
   "main": "index.ts",
   "scripts": {
@@ -29,6 +29,7 @@
     "@babel/preset-react": "^7.10.1",
     "@babel/preset-typescript": "^7.10.1",
     "@babel/runtime": "^7.10.2",
+    "@types/googlemaps": "^3.39.6",
     "@types/lodash": "^4.14.155",
     "@types/node": "^14.0.13",
     "@types/react": "^16.9.36",
