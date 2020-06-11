@@ -10,3 +10,8 @@ export type MapProps = {
   markers: MarkerType[];
   setMarker: (f: PrevMarkersState) => void;
 };
+
+export type DirectionsProps = {
+  places: MarkerType[];
+  travelMode: google.maps.TravelMode;
+};
