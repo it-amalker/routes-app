@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { DirectionsRenderer } from '@react-google-maps/api';
-import { MarkerType } from '../types/marker';
-
-type DirectionsProps = {
-  places: MarkerType[];
-  travelMode: string;
-};
+import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { DirectionsProps } from '../types/props';
+import { DirectionsResponse, DirectionOptions } from '../types/directions';
 
 const Directions: React.FC<DirectionsProps> = ({ places, travelMode }) => {
-  const [directions, setDirections] = useState(null);
-  const [error, setError] = useState(null);
+  const [directions, setDirections] = useState<DirectionsResponse | null>(null);
+
+  const [
+    directionOptions,
+    setDirectionOptions,
+  ] = useState<DirectionOptions | null>(null);
 
   useEffect(() => {
     const allWaypoints = places.map((p) => ({
-      location: { lat: p.lat, lng: p.lng },
+      location: new google.maps.LatLng(p.lat, p.lng),
       stopover: false,
     }));
 
@@ -25,29 +25,38 @@ const Directions: React.FC<DirectionsProps> = ({ places, travelMode }) => {
       (p, i, arr) => i !== 0 && i !== arr.length - 1,
     );
 
-    const directionsService = new google.maps.DirectionsService();
-    directionsService.route(
-      {
-        origin,
-        destination,
-        travelMode,
-        waypoints,
-      },
-      (result, status) => {
-        console.log(result);
-        if (status === google.maps.DirectionsStatus.OK) {
-          setDirections(result);
-        } else {
-          setError(result);
-        }
-      },
-    );
+    setDirectionOptions({
+      origin,
+      destination,
+      waypoints,
+      travelMode,
+    });
   }, [places, travelMode]);
 
-  if (error) {
-    return <h1>{error}</h1>;
-  }
-  return directions && <DirectionsRenderer directions={directions} />;
+  const directionsCallback = (response: DirectionsResponse) => {
+    console.log(response);
+    if (response) {
+      setDirections(() => response);
+    }
+    setDirectionOptions(null);
+  };
+
+  return (
+    <>
+      {directionOptions && (
+        <DirectionsService
+          options={{
+            origin: directionOptions.origin,
+            destination: directionOptions.destination,
+            waypoints: directionOptions.waypoints,
+            travelMode: directionOptions.travelMode,
+          }}
+          callback={directionsCallback}
+        />
+      )}
+      {directions && <DirectionsRenderer directions={directions} />}
+    </>
+  );
 };
 
 export default Directions;
