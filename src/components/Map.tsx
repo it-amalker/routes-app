@@ -7,7 +7,7 @@ import {
 } from '@react-google-maps/api';
 import { uniqueId } from 'lodash';
 import Search from './Search';
-import mapStyles from '../styles/mapStyles';
+import mapStyles from '../../map-styles/mapStyles';
 import { SetZoomType } from '../interfaces/mapZoom';
 import { MarkerType } from '../types/marker';
 import { EventClickType } from '../types/events';
@@ -131,7 +131,10 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
           ))}
           {selectedMarker ? renderWindowInfo() : null}
           {markers.length > 1 ? (
-            <Directions places={markers} travelMode="DRIVING" />
+            <Directions
+              places={markers}
+              travelMode={google.maps.TravelMode.DRIVING}
+            />
           ) : null}
         </GoogleMap>
       </>
