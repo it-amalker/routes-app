@@ -6,13 +6,17 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import { uniqueId } from 'lodash';
+import Geocode from 'react-geocode';
 import Search from './Search';
 import mapStyles from '../../map-styles/mapStyles';
 import { SetZoomType } from '../interfaces/mapZoom';
 import { MarkerType } from '../types/marker';
+import { ReverseGeocodeFunction } from '../types/types';
 import { EventClickType } from '../types/events';
 import { MapProps } from '../types/props';
 import Directions from './Directions';
+
+Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`);
 
 const maxMarkersOnMap = 5;
 
@@ -35,6 +39,19 @@ const options = {
   zoomControl: true,
 };
 
+const reverseGeocode: ReverseGeocodeFunction = async (lat, lng, cb) => {
+  try {
+    const response = await Geocode.fromLatLng(lat, lng);
+    const address = await response.results[0].formatted_address
+      .split(',')
+      .slice(0, -1)
+      .join(',');
+    cb(address);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
   const [selectedMarker, setSelectedMarker] = useState<MarkerType | null>(null);
 
@@ -55,36 +72,53 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
 
   const onMapClick = useCallback(
     (e: EventClickType): void => {
-      setMarker((current) => {
-        if (current.length < maxMarkersOnMap) {
-          return [
-            ...current,
-            {
-              id: uniqueId('marker-'),
-              lat: e.latLng.lat(),
-              lng: e.latLng.lng(),
-            },
-          ];
-        }
-        return current;
-      });
+      const createMarker = (address: string) => {
+        setMarker((current) => {
+          if (current.length < maxMarkersOnMap) {
+            return [
+              ...current,
+              {
+                id: uniqueId('marker-'),
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
+                address,
+              },
+            ];
+          }
+          console.log(current);
+          return current;
+        });
+      };
+      reverseGeocode(
+        String(e.latLng.lat()),
+        String(e.latLng.lng()),
+        createMarker,
+      );
     },
     [setMarker],
   );
 
   const onMarkerDrag = useCallback(
     (marker: MarkerType) => (e: EventClickType): void => {
-      const updatedMarker = {
-        id: marker.id,
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
+      const updateMarker = (address: string) => {
+        const updatedMarker = {
+          id: marker.id,
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+          address,
+        };
+        setMarker((current) => {
+          const newMarkersState = current.map((m) =>
+            m.id === marker.id ? updatedMarker : m,
+          );
+          return newMarkersState;
+        });
       };
-      setMarker((current) => {
-        const newMarkersState = current.map((m) =>
-          m.id === marker.id ? updatedMarker : m,
-        );
-        return newMarkersState;
-      });
+      reverseGeocode(
+        String(e.latLng.lat()),
+        String(e.latLng.lng()),
+        updateMarker,
+      );
     },
     [setMarker],
   );
@@ -95,15 +129,8 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
       onCloseClick={(): void => setSelectedMarker(null)}
     >
       <div>
-        <h3>Marker title</h3>
-        <p>
-          Lat:
-          {selectedMarker!.lat}
-        </p>
-        <p>
-          Lng:
-          {selectedMarker!.lng}
-        </p>
+        <h3>Address</h3>
+        <p>{selectedMarker!.address}</p>
       </div>
     </InfoWindow>
   );
@@ -120,9 +147,10 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
           onClick={onMapClick}
           onLoad={onMapLoad}
         >
-          {markers.map((marker) => (
+          {markers.map((marker, i) => (
             <Marker
               key={marker.id}
+              label={`${i + 1}`}
               position={{ lat: marker.lat, lng: marker.lng }}
               draggable
               onDragEnd={onMarkerDrag(marker)}
