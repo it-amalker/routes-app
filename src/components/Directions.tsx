@@ -54,7 +54,12 @@ const Directions: React.FC<DirectionsProps> = ({ places, travelMode }) => {
           callback={directionsCallback}
         />
       )}
-      {directions && <DirectionsRenderer directions={directions} />}
+      {directions && (
+        <DirectionsRenderer
+          options={{ suppressMarkers: true }}
+          directions={directions}
+        />
+      )}
     </>
   );
 };
