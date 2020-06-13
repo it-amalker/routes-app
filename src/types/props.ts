@@ -15,3 +15,7 @@ export type DirectionsProps = {
   places: MarkerType[];
   travelMode: google.maps.TravelMode;
 };
+
+export type RoutesUIProps = {
+  removeMarker: (id: string) => () => void;
+} & MapProps;
