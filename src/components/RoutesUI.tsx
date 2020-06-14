@@ -32,8 +32,7 @@ const RoutesUI: React.FC<RoutesUIProps> = ({
   const onDragOver = (e: React.DragEvent<HTMLLIElement>) => {
     e.preventDefault();
 
-    const { originalOrder } = dragAndDrop;
-    const { draggedFrom } = dragAndDrop;
+    const { originalOrder, draggedFrom } = dragAndDrop;
 
     const draggedTo = Number(e.currentTarget.dataset.position);
     const itemDragged = originalOrder[draggedFrom!];
@@ -103,7 +102,9 @@ const RoutesUI: React.FC<RoutesUIProps> = ({
       {markers.length > 0 ? (
         renderRoutePoints()
       ) : (
-        <p className="route-points-info">Add some markers on map</p>
+        <p className="empty-points-info">
+          <i>Add some markers on map</i>
+        </p>
       )}
     </>
   );
