@@ -85,7 +85,6 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
               },
             ];
           }
-          console.log(current);
           return current;
         });
       };

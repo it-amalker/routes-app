@@ -34,7 +34,6 @@ const Directions: React.FC<DirectionsProps> = ({ places, travelMode }) => {
   }, [places, travelMode]);
 
   const directionsCallback = (response: DirectionsResponse) => {
-    console.log(response);
     if (response) {
       setDirections(() => response);
     }
