@@ -13,3 +13,5 @@ export type DnDStateType = {
   originalOrder: MarkerType[];
   updatedOrder: MarkerType[];
 };
+
+export type TravelModeType = 'driving' | 'walking' | 'bicycling';
