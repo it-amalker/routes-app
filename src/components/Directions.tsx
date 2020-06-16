@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import { DirectionsProps } from '../types/props';
-import { DirectionsResponse, DirectionOptions } from '../types/directions';
+import {
+  DirectionsResponse,
+  DirectionsOptions,
+  DirectionStatus,
+} from '../types/directions';
 
-const Directions: React.FC<DirectionsProps> = ({ places, travelMode }) => {
+const Directions: React.FC<DirectionsProps> = ({
+  places,
+  travelMode,
+  setRouteNotFound,
+}) => {
   const [directions, setDirections] = useState<DirectionsResponse | null>(null);
 
   const [
     directionOptions,
     setDirectionOptions,
-  ] = useState<DirectionOptions | null>(null);
+  ] = useState<DirectionsOptions | null>(null);
 
   useEffect(() => {
     const allWaypoints = places.map((p) => ({
@@ -33,9 +41,15 @@ const Directions: React.FC<DirectionsProps> = ({ places, travelMode }) => {
     });
   }, [places, travelMode]);
 
-  const directionsCallback = (response: DirectionsResponse) => {
-    if (response) {
+  const directionsCallback = (
+    response: DirectionsResponse,
+    status: DirectionStatus,
+  ) => {
+    if (status === 'OK') {
+      setRouteNotFound(() => false);
       setDirections(() => response);
+    } else {
+      setRouteNotFound(() => true);
     }
     setDirectionOptions(null);
   };
