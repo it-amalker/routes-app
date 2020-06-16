@@ -1,2 +1,3 @@
 export type DirectionsResponse = google.maps.DirectionsResult;
-export type DirectionOptions = google.maps.DirectionsRequest;
+export type DirectionsOptions = google.maps.DirectionsRequest;
+export type DirectionStatus = google.maps.DirectionsStatus;
