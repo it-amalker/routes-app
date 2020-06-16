@@ -5,16 +5,20 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api';
-import { uniqueId } from 'lodash';
 import Geocode from 'react-geocode';
+import { uniqueId } from 'lodash';
+
 import Search from './Search';
+import Directions from './Directions';
+import TravelMode from './TravelMode';
+
 import mapStyles from '../../map-styles/mapStyles';
+
 import { SetZoomType } from '../interfaces/mapZoom';
 import { MarkerType } from '../types/marker';
-import { ReverseGeocodeFunction } from '../types/types';
 import { EventClickType } from '../types/events';
 import { MapProps } from '../types/props';
-import Directions from './Directions';
+import { ReverseGeocodeFunction, TravelModeType } from '../types/types';
 
 Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`);
 
@@ -52,8 +56,9 @@ const reverseGeocode: ReverseGeocodeFunction = async (lat, lng, cb) => {
   }
 };
 
-const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
+const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
   const [selectedMarker, setSelectedMarker] = useState<MarkerType | null>(null);
+  const [travelMode, setTravelMode] = useState<TravelModeType>('driving');
 
   const mapRef = useRef<SetZoomType | null>(null);
   const onMapLoad = useCallback((map) => {
@@ -134,9 +139,20 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
     </InfoWindow>
   );
 
+  const getTravelMode = (mode: TravelModeType) => {
+    const modes = {
+      driving: google.maps.TravelMode.DRIVING,
+      walking: google.maps.TravelMode.WALKING,
+      bicycling: google.maps.TravelMode.BICYCLING,
+    };
+
+    return modes[mode];
+  };
+
   const renderMap = (): JSX.Element => {
     return (
       <>
+        <TravelMode setTravelMode={setTravelMode} />
         <Search navigateTo={navigateTo} />
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
@@ -160,7 +176,8 @@ const Map: React.FC<MapProps> = ({ markers, setMarker }) => {
           {markers.length > 1 ? (
             <Directions
               places={markers}
-              travelMode={google.maps.TravelMode.DRIVING}
+              travelMode={getTravelMode(travelMode)}
+              setRouteNotFound={setRouteNotFound}
             />
           ) : null}
         </GoogleMap>
