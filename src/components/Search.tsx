@@ -43,7 +43,7 @@ const Search: React.FC<SearchProps> = ({ navigateTo }) => {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder="Enter Location!"
+          placeholder="Enter location"
         />
         <ComboboxPopover>
           <ComboboxList>
