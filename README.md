@@ -5,6 +5,6 @@
 
 ## Routes with Google Maps
 
-### Build route by manipulating markers on the map or use drag & drop interface on the left side. Also select travel mode (walking, driving, bicycling)
+#### Build route by manipulating markers on the map or use drag & drop interface on the left side. Also select travel mode (walking, driving, bicycling)
 
 [**App link**](https://routes-app.amalker.vercel.app/)
