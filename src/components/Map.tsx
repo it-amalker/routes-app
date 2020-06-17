@@ -11,6 +11,7 @@ import { uniqueId } from 'lodash';
 import Search from './Search';
 import Directions from './Directions';
 import TravelMode from './TravelMode';
+import usePosition from './hooks/usePosition';
 
 import mapStyles from '../../map-styles/mapStyles';
 
@@ -29,12 +30,6 @@ const libraries = ['places'];
 const mapContainerStyle = {
   width: '100%',
   height: '100vh',
-};
-
-const defaultLocation = {
-  // Moscow
-  lat: 55.751244,
-  lng: 37.618423,
 };
 
 const options = {
@@ -59,6 +54,7 @@ const reverseGeocode: ReverseGeocodeFunction = async (lat, lng, cb) => {
 const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
   const [selectedMarker, setSelectedMarker] = useState<MarkerType | null>(null);
   const [travelMode, setTravelMode] = useState<TravelModeType>('driving');
+  const [position, error] = usePosition();
 
   const mapRef = useRef<SetZoomType | null>(null);
   const onMapLoad = useCallback((map) => {
@@ -154,10 +150,11 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
       <>
         <TravelMode setTravelMode={setTravelMode} />
         <Search navigateTo={navigateTo} />
+        {error.message ? console.log(error.message) : null}
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
           zoom={9}
-          center={defaultLocation}
+          center={position}
           options={options}
           onClick={onMapClick}
           onLoad={onMapLoad}
