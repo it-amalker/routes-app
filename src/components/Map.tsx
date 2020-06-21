@@ -128,7 +128,7 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
       position={{ lat: selectedMarker!.lat, lng: selectedMarker!.lng }}
       onCloseClick={(): void => setSelectedMarker(null)}
     >
-      <div>
+      <div className="info-window">
         <h3>Address</h3>
         <p>{selectedMarker!.address}</p>
       </div>

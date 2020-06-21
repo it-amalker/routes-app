@@ -62,6 +62,21 @@ body {
   border: 2px solid #3878c7;
 }
 
+/* Info window */
+
+.info-window {
+  color: #000;
+}
+
+.info-window h3 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.info-window p {
+  margin: 0;
+}
+
 /* ROUTES UI */
 
 .routes-container {
@@ -108,7 +123,6 @@ body {
 /* Block shows if there are no markers on map */
 
 .empty-points-info {
-  /* font-size: 1.1rem; */
   font-weight: bold;
 }
 
