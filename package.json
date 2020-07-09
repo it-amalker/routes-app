@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/it-amalker/routes-app.git"
   },
-  "author": "",
+  "author": "Vadim Dmitrenko <it.amalker@gmail.com> (amalker)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/it-amalker/routes-app/issues"
