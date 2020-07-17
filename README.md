@@ -5,6 +5,6 @@
 
 ## :arrow_right_hook: Routes with Google Maps
 
-With this app you can build your own route by manipulating markers on the map or using drag & drop interface on the left side. Three travel mode are avaliable: walking:walking:, driving:blue_car: and bicycling:bicyclist:.
+With this app, you can build your own route by manipulating markers on the map or using a drag & drop interface on the left side. Three travel modes available: :walking:walking, :blue_car:driving and :bicyclist:bicycling.
 
 [**App link**](https://routes-app.amalker.vercel.app/)
