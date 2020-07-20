@@ -1,9 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import { ThemeProvider } from 'styled-components';
 import '@reach/combobox/styles.css';
 
-import './styles/style.css';
-import 'normalize.css';
+import App from './components/App';
+import GlobalStyle from './components/global/globalStyles';
+import Theme from './components/global/theme';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+import './styles/style.css';
+
+ReactDOM.render(
+  <ThemeProvider theme={Theme}>
+    <App />
+    <GlobalStyle />
+  </ThemeProvider>,
+  document.getElementById('root'),
+);
