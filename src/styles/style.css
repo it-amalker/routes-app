@@ -19,27 +19,6 @@ body {
   min-width: 555px;
 }
 
-/* Travel mode Select */
-
-.travel-mode-form {
-  position: absolute;
-  top: 1rem;
-  left: 5%;
-
-  z-index: 5;
-}
-
-.travel-mode {
-  height: 42px;
-
-  background-color: #fff;
-  border: 2px solid #3878c7;
-
-  box-sizing: border-box;
-
-  cursor: pointer;
-}
-
 /* MAP */
 
 .map {
