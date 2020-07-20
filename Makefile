@@ -5,7 +5,7 @@ types: check-types
 run: start
 
 start:
-	npm run server
+	npm run dev
 
 check-types:
 	npx tsc
