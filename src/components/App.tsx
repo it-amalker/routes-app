@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Map from './Map';
 import RoutesUI from './RoutesUI';
 import { MarkerType } from '../types/marker';
+import Layout from './layout';
 
 const App: React.FC = () => {
   const [markers, setMarker] = useState<MarkerType[]>([]);
@@ -13,7 +14,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <Layout>
       <div className="routes-container">
         <h1 className="app-title">Routes app</h1>
         <p className="routes-info">Move blocks to adjust the route:</p>
@@ -33,7 +34,7 @@ const App: React.FC = () => {
           setRouteNotFound={setRouteNotFound}
         />
       </div>
-    </>
+    </Layout>
   );
 };
 
