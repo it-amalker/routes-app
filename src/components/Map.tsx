@@ -10,7 +10,7 @@ import { uniqueId } from 'lodash';
 
 import Search from './Search';
 import Directions from './Directions';
-import TravelMode from './TravelMode';
+import TravelMode from './travelMode';
 import usePosition from './hooks/usePosition';
 
 import mapStyles from '../../map-styles/mapStyles';

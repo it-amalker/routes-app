@@ -1,5 +1,6 @@
 import React from 'react';
-import { TravelModeProps } from '../types/props';
+import { TravelModeProps } from '../../types/props';
+import { TravelModeForm, TravelModes } from './TravelMode.styles';
 
 const TravelMode: React.FC<TravelModeProps> = ({ setTravelMode }) => {
   const onChange = ({
@@ -11,13 +12,13 @@ const TravelMode: React.FC<TravelModeProps> = ({ setTravelMode }) => {
   };
 
   return (
-    <form className="travel-mode-form">
-      <select className="travel-mode" onChange={onChange}>
+    <TravelModeForm>
+      <TravelModes onChange={onChange}>
         <option value="driving">Driving</option>
         <option value="walking">Walking</option>
         <option value="bicycling">Bicycling</option>
-      </select>
-    </form>
+      </TravelModes>
+    </TravelModeForm>
   );
 };
 
