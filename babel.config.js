@@ -3,6 +3,7 @@ module.exports = {
 
   plugins: [
     '@babel/plugin-transform-runtime',
+    'babel-plugin-styled-components',
     '@babel/proposal-object-rest-spread',
   ],
 };
