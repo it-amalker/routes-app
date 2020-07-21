@@ -2,8 +2,8 @@ const theme = {
   colors: {
     main: '#3878c7',
     secondary: '#fafafa',
-    standard: '#000',
     darker: '#2661aa',
+    standard: '#000',
     danger: '#ea4335',
   },
   fontSizes: {
@@ -14,7 +14,7 @@ const theme = {
   },
   mediaQueries: {
     desktop: '(min-width: 1024px)',
-    tablet: '(min-width: 640px) and (max-width: 1023px)',
+    tablet: '(max-width: 1023px)',
     mobile: '(max-width: 639px)',
   },
 };
