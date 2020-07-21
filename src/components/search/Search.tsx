@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
 import {
   Combobox,
-  ComboboxInput,
   ComboboxPopover,
   ComboboxOption,
   ComboboxList,
 } from '@reach/combobox';
+import { SearchContainer, Input } from './Search.styles';
 
-import { SearchProps } from '../types/props';
+import { SearchProps } from '../../types/props';
 
 const Search: React.FC<SearchProps> = ({ navigateTo }) => {
   const {
@@ -21,8 +21,11 @@ const Search: React.FC<SearchProps> = ({ navigateTo }) => {
     suggestions: { status, data },
     clearSuggestions,
   } = usePlacesAutocomplete();
+
+  const inputElRef = useRef<HTMLInputElement | null>(null);
+
   return (
-    <div className="search">
+    <SearchContainer>
       <Combobox
         onSelect={async (location): Promise<void | Error> => {
           setValue(location, false);
@@ -36,8 +39,7 @@ const Search: React.FC<SearchProps> = ({ navigateTo }) => {
           }
         }}
       >
-        <ComboboxInput
-          className="search-input"
+        <Input
           value={value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
             setValue(e.target.value);
@@ -45,7 +47,7 @@ const Search: React.FC<SearchProps> = ({ navigateTo }) => {
           disabled={!ready}
           placeholder="Enter location"
         />
-        <ComboboxPopover>
+        <ComboboxPopover ref={inputElRef}>
           <ComboboxList>
             {status === 'OK' &&
               data.map(({ id, description }) => (
@@ -54,7 +56,7 @@ const Search: React.FC<SearchProps> = ({ navigateTo }) => {
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
-    </div>
+    </SearchContainer>
   );
 };
 
