@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-import { DnDStateType } from '../types/types';
-import { RoutesUIProps } from '../types/props';
+import * as Styled from './RoutesUI.styles';
+
+import { DnDStateType } from '../../types/types';
+import { RoutesUIProps } from '../../types/props';
 
 const initialDnDState: DnDStateType = {
   draggedFrom: null,
@@ -15,6 +17,7 @@ const RoutesUI: React.FC<RoutesUIProps> = ({
   markers,
   setMarker,
   removeMarker,
+  routeNotFound,
 }) => {
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
@@ -66,47 +69,47 @@ const RoutesUI: React.FC<RoutesUIProps> = ({
   };
 
   const renderRoutePoints = () => (
-    <ul className="route-points-list">
-      {markers.map((m, i) => (
-        <li
-          key={m.id}
-          data-position={i}
-          draggable
-          onDragStart={onDragStart}
-          onDragOver={onDragOver}
-          onDrop={onDrop}
-          className={
-            dragAndDrop && dragAndDrop.draggedTo === i
-              ? 'route-point drop-area'
-              : 'route-point'
-          }
-        >
-          <div className="point-order">
-            <p className="point-order-number">{i + 1}</p>
-          </div>
-          <div className="point-address">{m.address}</div>
-          <button
-            className="point-remove-btn"
-            type="button"
-            onClick={removeMarker(m.id)}
+    <Styled.Points>
+      {markers.map((m, i) => {
+        const Point =
+          dragAndDrop && dragAndDrop.draggedTo === i
+            ? Styled.DropArea
+            : Styled.Point;
+        return (
+          <Point
+            key={m.id}
+            data-position={i}
+            draggable
+            onDragStart={onDragStart}
+            onDragOver={onDragOver}
+            onDrop={onDrop}
           >
-            &#10008;
-          </button>
-        </li>
-      ))}
-    </ul>
+            <Styled.Order>
+              <Styled.OrderNumber>{i + 1}</Styled.OrderNumber>
+            </Styled.Order>
+            <Styled.Address>{m.address}</Styled.Address>
+            <Styled.RemoveButton type="button" onClick={removeMarker(m.id)}>
+              &#10008;
+            </Styled.RemoveButton>
+          </Point>
+        );
+      })}
+    </Styled.Points>
   );
 
   return (
-    <>
+    <Styled.RoutesContainer>
+      <Styled.AppTitle>Routes app</Styled.AppTitle>
+      <Styled.RoutesInfo>Move blocks to adjust the route:</Styled.RoutesInfo>
+      {routeNotFound ? (
+        <Styled.NoRoutes>Sorry, no route found :(</Styled.NoRoutes>
+      ) : null}
       {markers.length > 0 ? (
         renderRoutePoints()
       ) : (
-        <p className="empty-points-info">
-          <i>Add some markers on map</i>
-        </p>
+        <Styled.EmptyPoints>Add some markers on map</Styled.EmptyPoints>
       )}
-    </>
+    </Styled.RoutesContainer>
   );
 };
 
