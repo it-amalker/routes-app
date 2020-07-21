@@ -12,7 +12,7 @@ import Search from '../search';
 import Directions from '../Directions';
 import TravelMode from '../travelMode';
 import MapContainer from './Map.styles';
-import usePosition from '../hooks/usePosition';
+import usePosition from './usePosition';
 
 import mapStyles from './MapSkin.styles';
 
