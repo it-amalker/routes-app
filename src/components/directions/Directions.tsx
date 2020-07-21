@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
-import { DirectionsProps } from '../types/props';
+import { DirectionsProps } from '../../types/props';
 import {
   DirectionsResponse,
   DirectionsOptions,
   DirectionStatus,
-} from '../types/directions';
+} from '../../types/directions';
 
 const Directions: React.FC<DirectionsProps> = ({
   places,
