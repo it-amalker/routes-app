@@ -6,7 +6,6 @@ export const RoutesContainer = styled.section`
   justify-content: flex-start;
   align-items: center;
   width: 35%;
-  min-width: 370px;
 
   background-color: ${({ theme }) => theme.colors.main};
 
@@ -17,6 +16,15 @@ export const RoutesContainer = styled.section`
   box-sizing: border-box;
 
   z-index: 5;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    order: 2;
+    width: 100%;
+    height: 50vh;
+    border-right: none;
+
+    border-bottom: 2px solid ${({ theme }) => theme.colors.darker};
+  }
 `;
 
 export const AppTitle = styled.h1`
@@ -25,6 +33,12 @@ export const AppTitle = styled.h1`
 
   text-align: center;
   text-transform: uppercase;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    padding: 0.25rem 0;
+
+    font-size: ${({ theme }) => theme.fontSizes.big};
+  }
 `;
 
 export const RoutesInfo = styled.p`
@@ -36,6 +50,10 @@ export const RoutesInfo = styled.p`
   font-weight: bold;
 
   text-align: center;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    margin-bottom: 0.3rem;
+  }
 `;
 
 export const NoRoutes = styled.p`
@@ -56,6 +74,15 @@ export const Points = styled.ul`
   border-radius: 5px;
 
   list-style: none;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    width: 40%;
+    padding: 0.5rem 0.4rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.mobile} {
+    width: 70%;
+  }
 `;
 
 export const Point = styled.li`
@@ -81,6 +108,11 @@ export const Point = styled.li`
     background-color: ${({ theme }) => theme.colors.darker};
     cursor: move;
   }
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    margin-bottom: 0.325rem;
+    padding: 0.325rem;
+  }
 `;
 
 export const Order = styled.div`
@@ -90,6 +122,10 @@ export const Order = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.secondary};
   border-radius: 50%;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    padding: 0.325rem;
+  }
 `;
 
 export const OrderNumber = styled.p`
@@ -104,6 +140,10 @@ export const OrderNumber = styled.p`
 
 export const Address = styled.div`
   padding: 0 0.625rem;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    padding: 0 0.325rem;
+  }
 `;
 
 export const RemoveButton = styled.button`
@@ -120,6 +160,10 @@ export const RemoveButton = styled.button`
     color: ${({ theme }) => theme.colors.danger};
 
     cursor: pointer;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    padding: 0.16rem 0;
   }
 `;
 

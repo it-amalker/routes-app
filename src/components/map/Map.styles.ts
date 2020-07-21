@@ -4,7 +4,14 @@ export const MapContainer = styled.section`
   position: relative;
 
   width: 65%;
-  min-width: 555px;
+  height: 100vh;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    order: 1;
+
+    width: 100%;
+    height: 50vh;
+  }
 `;
 
 export const Info = styled.div`

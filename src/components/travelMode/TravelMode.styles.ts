@@ -6,6 +6,14 @@ export const TravelModeForm = styled.form`
   left: 5%;
 
   z-index: 5;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    top: 0.9rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.mobile} {
+    top: 0.8rem;
+  }
 `;
 
 export const TravelModes = styled.select`

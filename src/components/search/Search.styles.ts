@@ -12,6 +12,18 @@ export const SearchContainer = styled.div`
   margin: 0 auto;
 
   z-index: 5;
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    top: 0.9rem;
+
+    width: 16rem;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.mobile} {
+    top: 0.8rem;
+
+    width: 12rem;
+  }
 `;
 
 export const Input = styled(ComboboxInput)`

@@ -6,6 +6,14 @@ const Main = styled.div`
   height: 100vh;
 
   color: ${({ theme }) => theme.colors.secondary};
+
+  @media ${({ theme }) => theme.mediaQueries.tablet} {
+    flex-direction: column;
+  }
+
+  @media ${({ theme }) => theme.mediaQueries.mobile} {
+    min-width: 420px;
+  }
 `;
 
 export default Main;
