@@ -8,18 +8,19 @@ import {
 import Geocode from 'react-geocode';
 import { uniqueId } from 'lodash';
 
-import Search from './Search';
-import Directions from './Directions';
-import TravelMode from './travelMode';
-import usePosition from './hooks/usePosition';
+import Search from '../search';
+import Directions from '../Directions';
+import TravelMode from '../travelMode';
+import MapContainer from './Map.styles';
+import usePosition from '../hooks/usePosition';
 
-import mapStyles from '../../map-styles/mapStyles';
+import mapStyles from './MapSkin.styles';
 
-import { SetZoomType } from '../interfaces/mapZoom';
-import { MarkerType } from '../types/marker';
-import { EventClickType } from '../types/events';
-import { MapProps } from '../types/props';
-import { ReverseGeocodeFunction, TravelModeType } from '../types/types';
+import { SetZoomType } from '../../interfaces/mapZoom';
+import { MarkerType } from '../../types/marker';
+import { EventClickType } from '../../types/events';
+import { MapProps } from '../../types/props';
+import { ReverseGeocodeFunction, TravelModeType } from '../../types/types';
 
 Geocode.setApiKey(`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`);
 
@@ -147,7 +148,7 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
 
   const renderMap = (): JSX.Element => {
     return (
-      <>
+      <MapContainer>
         <TravelMode setTravelMode={setTravelMode} />
         <Search navigateTo={navigateTo} />
         {error.message ? console.log(error.message) : null}
@@ -178,7 +179,7 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
             />
           ) : null}
         </GoogleMap>
-      </>
+      </MapContainer>
     );
   };
 
