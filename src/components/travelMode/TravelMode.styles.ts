@@ -9,10 +9,12 @@ export const TravelModeForm = styled.form`
 `;
 
 export const TravelModes = styled.select`
-  height: 42px;
+  height: 2.84375rem;
 
-  background-color: #fff;
-  border: 2px solid #3878c7;
+  font: inherit;
+
+  background-color: ${({ theme }) => theme.colors.secondary};
+  border: 2px solid ${({ theme }) => theme.colors.main};
 
   box-sizing: border-box;
 

@@ -12,7 +12,7 @@ export const RoutesContainer = styled.section`
 
   border-right: 2px solid ${({ theme }) => theme.colors.darker};
 
-  box-shadow: 1px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0.06rem 0px 0.32rem 0 rgba(0, 0, 0, 0.75);
 
   box-sizing: border-box;
 
@@ -20,9 +20,8 @@ export const RoutesContainer = styled.section`
 `;
 
 export const AppTitle = styled.h1`
-  width: 100%;
-  margin: 1rem 0;
-  padding: 20px 0;
+  margin: 0;
+  padding: 2.25rem 0;
 
   text-align: center;
   text-transform: uppercase;
@@ -35,6 +34,8 @@ export const RoutesInfo = styled.p`
 
   font-size: ${({ theme }) => theme.fontSizes.medium};
   font-weight: bold;
+
+  text-align: center;
 `;
 
 export const NoRoutes = styled.p`
@@ -49,7 +50,7 @@ export const EmptyPoints = styled.p`
 export const Points = styled.ul`
   width: 70%;
   margin: 0;
-  padding: 20px 15px;
+  padding: 1.25rem 1rem;
 
   border: 1px solid ${({ theme }) => theme.colors.secondary};
   border-radius: 5px;
@@ -62,10 +63,10 @@ export const Point = styled.li`
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 0.625rem;
+  padding: 0.625rem;
 
-  font-size: ${({ theme }) => theme.fontSizes.smallest};
+  font-size: ${({ theme }) => theme.fontSizes.small};
 
   background-color: ${({ theme }) => theme.colors.main};
 
@@ -102,13 +103,11 @@ export const OrderNumber = styled.p`
 `;
 
 export const Address = styled.div`
-  padding: 0 10px;
-
-  font-weight: bold;
+  padding: 0 0.625rem;
 `;
 
 export const RemoveButton = styled.button`
-  padding: 5px 0;
+  padding: 0.32rem 0;
 
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSizes.big};
@@ -143,7 +142,7 @@ export const DropArea = styled(Point)`
     height: 100%;
 
     color: ${({ theme }) => theme.colors.standard};
-    font-size: 0.8rem;
+    font-size: ${({ theme }) => theme.fontSizes.smallest};
     font-weight: bold;
     text-transform: uppercase;
 
