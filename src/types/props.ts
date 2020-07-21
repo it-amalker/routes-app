@@ -24,6 +24,7 @@ export type RoutesUIProps = {
   markers: MarkerType[];
   setMarker: (f: PrevMarkersState) => void;
   removeMarker: (id: string) => () => void;
+  routeNotFound: boolean;
 };
 
 type PrevTravelModeState = (travelMode: TravelModeType) => TravelModeType;
