@@ -1,17 +1,18 @@
 import React, { useState, useCallback, useRef } from 'react';
+import { uniqueId } from 'lodash';
+import Geocode from 'react-geocode';
+
 import {
   useLoadScript,
   GoogleMap,
   Marker,
   InfoWindow,
 } from '@react-google-maps/api';
-import Geocode from 'react-geocode';
-import { uniqueId } from 'lodash';
-
+// components
 import Search from '../search';
-import Directions from '../Directions';
+import Directions from '../directions';
 import TravelMode from '../travelMode';
-import MapContainer from './Map.styles';
+import * as Styled from './Map.styles';
 import usePosition from './usePosition';
 
 import mapStyles from './MapSkin.styles';
@@ -129,10 +130,10 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
       position={{ lat: selectedMarker!.lat, lng: selectedMarker!.lng }}
       onCloseClick={(): void => setSelectedMarker(null)}
     >
-      <div className="info-window">
-        <h3>Address</h3>
-        <p>{selectedMarker!.address}</p>
-      </div>
+      <Styled.Info>
+        <Styled.Title>Address</Styled.Title>
+        <Styled.Address>{selectedMarker!.address}</Styled.Address>
+      </Styled.Info>
     </InfoWindow>
   );
 
@@ -148,7 +149,7 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
 
   const renderMap = (): JSX.Element => {
     return (
-      <MapContainer>
+      <Styled.MapContainer>
         <TravelMode setTravelMode={setTravelMode} />
         <Search navigateTo={navigateTo} />
         {error.message ? console.log(error.message) : null}
@@ -179,15 +180,15 @@ const Map: React.FC<MapProps> = ({ markers, setMarker, setRouteNotFound }) => {
             />
           ) : null}
         </GoogleMap>
-      </MapContainer>
+      </Styled.MapContainer>
     );
   };
 
   if (loadError) {
-    return <span>Map cannot be loaded right now, please try later</span>;
+    return <div>Map cannot be loaded right now, please try later</div>;
   }
 
-  return isLoaded ? renderMap() : <span>Loading maps</span>;
+  return isLoaded ? renderMap() : <div>Loading maps</div>;
 };
 
 export default Map;
