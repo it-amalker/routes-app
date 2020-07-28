@@ -13,7 +13,7 @@ import Search from '../search';
 import Directions from '../directions';
 import TravelMode from '../travelMode';
 import * as Styled from './Map.styles';
-import usePosition from './usePosition';
+import usePosition from '../utils/usePosition';
 
 import mapStyles from './MapSkin.styles';
 

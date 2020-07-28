@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Map from '../map';
-import RoutesUI from '../routesUI';
-import { MarkerType } from '../../types/marker';
-import Layout from '../layout';
+import Map from './map';
+import RoutesUI from './routesUI';
+import { MarkerType } from '../types/marker';
+import Layout from './layout';
 
 const App: React.FC = () => {
   const [markers, setMarker] = useState<MarkerType[]>([]);
